@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm,Controller } from "react-hook-form";
 import {
     Box,
     Input,
@@ -12,21 +12,48 @@ import {
       Spacer,
       FormErrorMessage,
     Stack,
+    Checkbox,
+    RadioGroup,
+    Radio,
+  
+   
 } from '@chakra-ui/react'
-import {ArrowBackIcon,AddIcon} from '@chakra-ui/icons'
+
+import {ArrowBackIcon, AddIcon} from '@chakra-ui/icons';
+import { Select } from "chakra-react-select";
+const States = [
+    {
+        value:"KA",
+        label:"Karnataka"
+    },
+    {
+        value:"AP",
+        label:"Andra Pradesh"
+    },
+    {
+        value:"TN",
+        label:"Tamil Nadu"
+    },
+];
+// import CustomBox from "../components/customBox";
 const Form = () =>{
-    const {register,handleSubmit,formState:{errors}} = useForm();
+    const {register,handleSubmit,formState:{errors},control,} = useForm();
     const onFormSubmit = (data) => console.log(data);
     
     return(
         <>
           
-        <Box bg='black' mb='5' p={4} style={{borderRadius: "10px"}}>
+        <Box
+         mb='5'
+          p={4}
+          borderWidth="10px"
+          borderRadius="1g"
+          >
       <Flex alignItems = "center" gap = {2}>
           <Link to = "">
               <ArrowBackIcon w = {6} h = {6}/>
           </Link>
-          <Heading as= "h3" size="lg" color="grey">
+          <Heading as= "h3" size="lg" >
                Form
       </Heading>
       <Spacer/>
@@ -39,8 +66,10 @@ const Form = () =>{
         </Flex>
         </Box>
         <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Box bg='white' mb='5' p={4} style={{borderRadius: "10px"}}>
-            <Stack spacing={4}>
+        <Box  mb='5' p={4} style={{borderRadius: "10px",}}>
+        <Stack spacing={4} >
+            
+            
 
                 <FormControl isInvalid={errors.name}>
                     <FormLabel color="green">Name</FormLabel>
@@ -53,11 +82,12 @@ const Form = () =>{
 
                 <FormControl isInvalid={errors.age}>
                     <FormLabel color="green">Age</FormLabel>
-                    <Input type="text" placeholder="Age" {...register("age",
+                    <Input type="number" placeholder="Age" {...register("age",
                     {required:
                          {value:true,message:"age field is not empty",},
                          min:{
                             value:20,
+                        
                             message: "age must be greater than 20 ",
                          },
                          })}/>
@@ -65,6 +95,105 @@ const Form = () =>{
                         {errors?.age && errors.age.message}
                     </FormErrorMessage>
                 </FormControl>
+                <FormControl isInvalid={errors.date_of_birth}>
+                <FormLabel color="green">Date of Birth</FormLabel>
+                <Input type="date" {...register("date_of_birth",
+                    {required:"Enter Date of Birth"
+                         
+                         })}/>
+                         <FormErrorMessage>
+                        {errors?.date_of_birth && errors.date_of_birth.message}
+                    </FormErrorMessage>
+                    </FormControl>
+                    <Controller
+                    control={control}
+                    name="state"
+                    rules={{
+                        required:"please select state"
+                    }}
+                    render={({field: {onChange,onBlur,value,name,ref}}) =>(
+                        <FormControl isInvalid={errors.state}>
+                        <FormLabel color="green">States</FormLabel>
+                        <Select
+                        name={name}
+                        ref={ref}
+                        onChange={(e) =>{
+                        onChange(e);
+                        onBlur={onBlur}
+                        value={value}
+                        }}
+                        options={States}
+                        placeholder="Enter States"
+                        closeMenuOnSelect={true}
+                        
+                        />
+                        <FormErrorMessage>
+                            {errors?.State && errors.state.message}
+                        </FormErrorMessage>
+                        
+                    </FormControl>
+
+                    )}>
+                    </Controller>
+                    <FormControl isInvalid={errors.language}>
+                    <FormLabel color="green">language</FormLabel>
+                   <Stack direction={"row"}>
+                    <Checkbox
+            size="md"
+            colorScheme="blue"
+            value="tamil"
+            {...register("language",{required:"please select",
+        })}
+            >Tamil
+            </Checkbox>
+            
+          <Checkbox
+          size="md"
+          colorScheme="green"
+          value="English"
+          isDisabled={true}
+          {...register("language",{required:"please select ",
+        })}
+        >English
+        </Checkbox>
+        </Stack>
+
+                    
+                    <FormErrorMessage>
+                    {errors?.name && errors.language.message}
+                    </FormErrorMessage>
+                  
+                </FormControl>
+                <FormControl isInvalid={errors.gender}>
+                    <FormLabel color="green">Gender</FormLabel>
+                    <RadioGroup>
+                        <Stack direction={"row"}>
+                            <Radio
+                            size="md"
+                            colorScheme="blue"
+                            value="male"
+                            {...register("gender",{required:"please select Gender",
+                        })}
+                        >Male
+                        </Radio>
+                        <Radio
+                            size="md"
+                            colorScheme="blue"
+                            value="female"
+                            {...register("gender",{required:"please select Gender",
+                        })}
+                        >Female
+                        </Radio>
+                     
+                      </Stack>
+                      </RadioGroup>
+                    <FormErrorMessage>
+                    {errors?.gender && errors.gender.message}
+                    </FormErrorMessage>
+                  
+                </FormControl>
+                   
+
                 <Button colorScheme="blue" type="Submit">
                     Submit
                 </Button>

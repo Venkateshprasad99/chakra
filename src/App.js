@@ -1,3 +1,4 @@
+
 import { ChakraProvider } from '@chakra-ui/react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -5,6 +6,9 @@ import Dashboard from './Pages/Dashboard';
 import About from './Pages/About';
 import Layout from './Pages/layout';
 import Form from './Pages/Form';
+import DynamicForm from './Pages/DynamicForm';
+
+
 function App() {
 
     return (
@@ -17,7 +21,9 @@ function App() {
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='about' element={<About />} />
                     <Route path='form' element={<Form />} />
-                    {/* <Route path='dynamicform'element={<Dynamicform/>}/> */}
+                    <Route path='dynamicform' element={<DynamicForm />} />
+                  
+                    
 
                 </Route>
             </Routes>

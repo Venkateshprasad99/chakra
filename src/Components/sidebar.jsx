@@ -21,6 +21,10 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Button,
+  ColorModeContext,
+  useColorMode,
+  ColorMode,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -29,14 +33,15 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
+import{MoonIcon,SunIcon} from'@chakra-ui/icons';
 
 
 const LinkItems = [
   { name: 'Dashboard', icon: FiHome,to:'/Dashboard' },
   { name: 'About', icon: FiTrendingUp,to:'/About' },
-  // { name: 'DynamicForm', icon: FiTrendingUp,to:'/dynamicform' },
   { name: 'Form', icon: FiTrendingUp,to:'/Form' },
-  
+  { name: 'DynamicForm', icon: FiTrendingUp,to:'/dynamicform' },
+ 
 ];
 
 export default function Sidebar({children}) {
@@ -134,6 +139,7 @@ const NavItem = ({ to,icon, children, ...rest }) => {
 
 
 const MobileNav = ({ onOpen, ...rest }) => {
+  const{ColorMode,toggleColorMode} = useColorMode();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -152,6 +158,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
+      
 
       <Text
         display={{ base: 'flex', md: 'none' }}
@@ -168,6 +175,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
           aria-label="open menu"
           icon={<FiBell />}
         />
+        <Button onClick={toggleColorMode}>
+        {ColorMode ==='light'?<MoonIcon/> : <SunIcon/> }
+      </Button>
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton
