@@ -66,7 +66,7 @@ const Form = () =>{
         </Flex>
         </Box>
         <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Box  mb='5' p={4} style={{borderRadius: "10px",}}>
+        <Box   mb='5' p={4} style={{borderRadius: "10px",}}>
         <Stack spacing={4} >
             
             

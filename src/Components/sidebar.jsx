@@ -77,6 +77,27 @@ export default function Sidebar({children}) {
 
 
 const SidebarContent = ({ onClose, ...rest }) => {
+  const { colorMode } = React.useContext(ColorModeContext);
+  const { toggleColorMode } = React.useContext(ColorModeContext);
+  return (
+    <Box
+      as="nav"
+      bg={useColorModeValue('gray.800', 'gray.200')}
+      color={useColorModeValue('gray.800', 'gray.200')}
+      {...rest}
+    >
+      <Box
+        as="ul"
+        display={{ base: 'block', md: 'none' }}
+        p={{ base: 4, md: 0 }}
+        m={{ base: 0, md: 60 }}
+      >
+        {LinkItems.map((item, index) => (
+          <LinkItem key={index} {...item} />
+        ))}
+      </Box>
+    </Box>
+  );
   return (
     <Box
       transition="3s ease"
