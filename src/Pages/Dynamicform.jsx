@@ -195,7 +195,7 @@ function DynamicForm() {
                         <ArrowBackIcon w={6} h={6} />
                     </Link> &nbsp;
                     <Heading as="h3" size="lg"  >
-                        create Invoice
+                       Dynamic Form
                     </Heading>
                 </Flex>
             </Box>

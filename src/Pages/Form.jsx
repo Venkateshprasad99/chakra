@@ -15,30 +15,41 @@ import {
     Checkbox,
     RadioGroup,
     Radio,
+    
   
    
 } from '@chakra-ui/react'
 
 import {ArrowBackIcon, AddIcon} from '@chakra-ui/icons';
-import { Select } from "chakra-react-select";
-const States = [
-    {
-        value:"KA",
-        label:"Karnataka"
-    },
-    {
-        value:"AP",
-        label:"Andra Pradesh"
-    },
-    {
-        value:"TN",
-        label:"Tamil Nadu"
-    },
-];
-// import CustomBox from "../components/customBox";
+import { Select, Components } from "chakra-react-select";
+import { useSelector,useDispatch } from "react-redux";
+import { clearState } from "../Feature/Slice";
+
+
+
+// const States = [
+//     {
+//         value:"KA",
+//         label:"Karnataka"
+//     },
+//     {
+//         value:"AP",
+//         label:"Andra Pradesh"
+//     },
+//     {
+//         value:"TN",
+//         label:"Tamil Nadu"
+//     },
+// ];
+
 const Form = () =>{
+   
     const {register,handleSubmit,formState:{errors},control,} = useForm();
     const onFormSubmit = (data) => console.log(data);
+
+    const {States} =useSelector((states) =>states.State);
+
+    const dispatch = useDispatch();
     
     return(
         <>
@@ -63,6 +74,10 @@ const Form = () =>{
 
         </Button>
         </Link>
+        <Button colorScheme="blue" onClick={() => dispatch(clearState())}>
+        CLEAR STATE
+        </Button>
+        
         </Flex>
         </Box>
         <form onSubmit={handleSubmit(onFormSubmit)}>
@@ -96,15 +111,16 @@ const Form = () =>{
                     </FormErrorMessage>
                 </FormControl>
                 <FormControl isInvalid={errors.date_of_birth}>
-                <FormLabel color="green">Date of Birth</FormLabel>
-                <Input type="date" {...register("date_of_birth",
-                    {required:"Enter Date of Birth"
-                         
-                         })}/>
-                         <FormErrorMessage>
-                        {errors?.date_of_birth && errors.date_of_birth.message}
-                    </FormErrorMessage>
-                    </FormControl>
+                    <FormLabel color="green">Date of Birth</FormLabel>
+                    <Input type="date" {...register("date_of_birth",
+                        {required:"Enter Date of Birth"
+                                
+                                })}/>
+                                <FormErrorMessage>
+                            {errors?.date_of_birth && errors.date_of_birth.message}
+                        </FormErrorMessage>
+                </FormControl>
+
                     <Controller
                     control={control}
                     name="state"

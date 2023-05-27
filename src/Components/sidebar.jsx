@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link as Navlink} from 'react-router-dom';
 import { useForm } from "react-hook-form";
+
 import {
   IconButton,
   Avatar,
@@ -36,11 +37,15 @@ import {
 import{MoonIcon,SunIcon} from'@chakra-ui/icons';
 
 
+
+
 const LinkItems = [
   { name: 'Dashboard', icon: FiHome,to:'/Dashboard' },
   { name: 'About', icon: FiTrendingUp,to:'/About' },
   { name: 'Form', icon: FiTrendingUp,to:'/Form' },
   { name: 'DynamicForm', icon: FiTrendingUp,to:'/dynamicform' },
+  { name: 'AddState', icon: FiTrendingUp,to:'/addstate' },
+  
  
 ];
 
@@ -80,25 +85,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
   const { colorMode } = React.useContext(ColorModeContext);
   const { toggleColorMode } = React.useContext(ColorModeContext);
   return (
-    <Box
-      as="nav"
-      bg={useColorModeValue('gray.800', 'gray.200')}
-      color={useColorModeValue('gray.800', 'gray.200')}
-      {...rest}
-    >
-      <Box
-        as="ul"
-        display={{ base: 'block', md: 'none' }}
-        p={{ base: 4, md: 0 }}
-        m={{ base: 0, md: 60 }}
-      >
-        {LinkItems.map((item, index) => (
-          <LinkItem key={index} {...item} />
-        ))}
-      </Box>
-    </Box>
-  );
-  return (
+    <>
+    
+ 
     <Box
       transition="3s ease"
       bg={useColorModeValue('white', 'gray.900')}
@@ -120,12 +109,13 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </NavItem>
       ))}
     </Box>
+    </>
   );
 };
 
 
 const NavItem = ({ to,icon, children, ...rest }) => {
-  console.log(children);
+  
   return (
     <Link 
     as={Navlink}
@@ -167,9 +157,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue('white', 'gray.900')}
+      bg={useColorModeValue('')}
       borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+      borderBottomColor={useColorModeValue('black', 'white')}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}>
       <IconButton

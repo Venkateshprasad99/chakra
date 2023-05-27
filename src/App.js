@@ -7,7 +7,7 @@ import About from './Pages/About';
 import Layout from './Pages/layout';
 import Form from './Pages/Form';
 import DynamicForm from './Pages/DynamicForm';
-
+import AddState from './Pages/AddState';
 
 function App() {
 
@@ -22,7 +22,7 @@ function App() {
                     <Route path='about' element={<About />} />
                     <Route path='form' element={<Form />} />
                     <Route path='dynamicform' element={<DynamicForm />} />
-                  
+                    <Route path='addstate' element={<AddState />} />
                     
 
                 </Route>
